@@ -13,8 +13,9 @@ pipeline {
         }
         stage('Virtual Environment Setup') {
             steps {
-                sh """
-                #!/bin/bash
+                sh """#!/bin/bash
+
+                echo "Who I'm $SHELL"
                 python -m venv env
                 source ./env/bin/activate
                 """
