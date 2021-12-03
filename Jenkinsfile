@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh """
                 python -m venv env
-                source ./env/bin/activate
+                ./env/bin/activate
                 """
             }
         }
