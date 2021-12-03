@@ -11,5 +11,11 @@ pipeline {
                 sh 'python --version'
             }
         }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip install -r req.txt'
+            }
+        }
     }
 }
