@@ -14,14 +14,15 @@ pipeline {
         stage('Virtual Environment Setup') {
             steps {
                 sh """
+                #!/bin/bash
                 python -m venv env
-                ./env/bin/activate
+                source ./env/bin/activate
                 """
             }
         }
         stage('Install Dependencies') {
             steps {
-                sh 'python -m pip install -r req.txt'
+                sh 'pip install -r req.txt'
             }
         }
     }
