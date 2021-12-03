@@ -11,19 +11,14 @@ pipeline {
                 sh 'python --version'
             }
         }
-        stage('Virtual Environment Setup') {
+        stage('Python Configuration') {
             steps {
                 sh """#!/bin/bash
 
-                echo "Who I'm $SHELL"
                 python -m venv env
                 source ./env/bin/activate
+                pip install -r req.txt
                 """
-            }
-        }
-        stage('Install Dependencies') {
-            steps {
-                sh 'pip install -r req.txt'
             }
         }
     }
