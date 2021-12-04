@@ -2,36 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Setting up of Virtual Environment') {
+        stage('Python Invocation Stage') {
             steps {
-                sh 'python3 -m venv venv'
-                sh 'ls -la'
                 sh """#!/bin/bash
+                python3 -n venv venv
                 source venv/bin/activate
+                pip install -r requirements.txt
+                python main.py
                 """
             }
         }
-        stage('Installing Python Dependencies') {
-            steps {
-                sh 'pip install -r req.txt'
-            }
-        }
 
-        stage('Check if the user is root') {
+        stage('Output Upload Stage') {
             steps {
-                sh 'id -u'
-            }
-        }
-
-        stage('Currenr Working Directory') {
-            steps {
-                sh 'pwd'
-            }
-        }
-
-        stage('Find which shell is used') {
-            steps {
-                sh 'echo $SHELL'
+                sh """#!/bin/bash
+                echo "Uploading output to S3"
+                """
             }
         }
     }
