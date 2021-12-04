@@ -2,14 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Version Check') {
+        stage('Setting up of Virtual Environment') {
             steps {
-                sh 'python --version'
+                sh 'python3 -m venv venv'
+                sh 'source venv/bin/activate'
             }
         }
-        stage('Check which user is running'){
+        stage('Installing Python Dependencies') {
             steps {
-                sh 'whoami'
+                sh 'pip install -r req.txt'
             }
         }
 
