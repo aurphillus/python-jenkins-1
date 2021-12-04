@@ -5,6 +5,7 @@ pipeline {
         stage('Setting up of Virtual Environment') {
             steps {
                 sh 'python3 -m venv venv'
+                sh 'ls -la'
                 sh 'source venv/bin/activate'
             }
         }
