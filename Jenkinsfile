@@ -6,7 +6,9 @@ pipeline {
             steps {
                 sh 'python3 -m venv venv'
                 sh 'ls -la'
-                sh 'source venv/bin/activate'
+                sh """#!/bin/bash
+                source venv/bin/activate
+                """
             }
         }
         stage('Installing Python Dependencies') {
