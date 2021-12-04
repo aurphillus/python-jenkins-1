@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.8.12-slim-buster'
-        }
-    }
+    agent any
 
     stages {
         stage('Version Check') {
@@ -11,15 +7,27 @@ pipeline {
                 sh 'python --version'
             }
         }
-        stage('Python Configuration') {
+        stage('Check which user is running'){
             steps {
-                sh """#!/bin/bash
+                sh 'whoami'
+            }
+        }
 
-                python -m venv env
-                source ./env/bin/activate
-                pip install -r req.txt
-                python main.py
-                """
+        stage('Check if the user is root') {
+            steps {
+                sh 'id -u'
+            }
+        }
+
+        stage('Currenr Working Directory') {
+            steps {
+                sh 'pwd'
+            }
+        }
+
+        stage('Find which shell is used') {
+            steps {
+                sh 'echo $SHELL'
             }
         }
     }
